@@ -33,7 +33,15 @@
 <main class="capa">
   <h1>Pagamento via PIX</h1>
   <p class="sub">Copie o código abaixo e pague no app do seu banco.</p>
-  <p class="vazio">Nenhum código disponível no momento.</p>
+  
+    <article class="cartao">
+      <h2>TESTE — apagar depois</h2>
+      <p class="valor">R$ 12,34</p>
+      <p class="obs">teste de publicacao</p>
+      <label>Código PIX copia e cola</label>
+      <textarea readonly rows="4" onclick="this.select()">00020126580014BR.GOV.BCB.PIX0136teste-de-publicacao-1234567890abcd5204000053039865802BR</textarea>
+      <button type="button" data-codigo="00020126580014BR.GOV.BCB.PIX0136teste-de-publicacao-1234567890abcd5204000053039865802BR">Copiar código PIX</button>
+    </article>
   <footer>Confira o valor e o destinatário no app do seu banco antes de confirmar o pagamento.</footer>
 </main>
 <script>
