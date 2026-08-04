@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pagamento via PIX</title>
+<meta name="robots" content="noindex">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;padding:28px 16px;background:#0b0f0d;color:#e7f2ee;
+       font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.5}
+  .capa{max-width:560px;margin:0 auto}
+  h1{font-size:22px;margin:0 0 6px}
+  .sub{color:#9fb3ab;margin:0 0 22px;font-size:14.5px}
+  .cartao{background:#111a16;border:1px solid rgba(255,255,255,.1);border-radius:14px;
+          padding:18px;margin-bottom:16px}
+  .cartao h2{font-size:17px;margin:0 0 4px}
+  .valor{font-size:26px;font-weight:800;color:#12E29A;margin:0 0 10px}
+  .obs{color:#9fb3ab;font-size:14px;margin:0 0 12px}
+  label{display:block;font-size:12.5px;color:#9fb3ab;margin-bottom:6px}
+  textarea{width:100%;background:#0a120f;color:#cfe8de;border:1px solid rgba(255,255,255,.12);
+           border-radius:9px;padding:10px;font-family:ui-monospace,Menlo,Consolas,monospace;
+           font-size:12px;resize:vertical;word-break:break-all}
+  button{width:100%;margin-top:10px;padding:13px;border:0;border-radius:10px;background:#12E29A;
+         color:#04231a;font-size:15px;font-weight:700;cursor:pointer}
+  button:active{transform:scale(.99)}
+  button.ok{background:#0ea97a;color:#fff}
+  .vazio{color:#9fb3ab;text-align:center;padding:40px 0}
+  footer{color:#6f827b;font-size:12px;text-align:center;margin-top:26px}
+</style>
+</head>
+<body>
+<main class="capa">
+  <h1>Pagamento via PIX</h1>
+  <p class="sub">Copie o código abaixo e pague no app do seu banco.</p>
+  <p class="vazio">Nenhum código disponível no momento.</p>
+  <footer>Confira o valor e o destinatário no app do seu banco antes de confirmar o pagamento.</footer>
+</main>
+<script>
+document.querySelectorAll('button[data-codigo]').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var txt = b.getAttribute('data-codigo');
+    var pronto = function () {
+      var antes = b.textContent;
+      b.textContent = 'Código copiado!'; b.classList.add('ok');
+      setTimeout(function () { b.textContent = antes; b.classList.remove('ok'); }, 2200);
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(txt).then(pronto, function () { manual(); });
+    } else { manual(); }
+    function manual() {
+      var a = document.createElement('textarea');
+      a.value = txt; document.body.appendChild(a); a.select();
+      try { document.execCommand('copy'); pronto(); } catch (e) { alert('Copie manualmente pelo campo acima.'); }
+      document.body.removeChild(a);
+    }
+  });
+});
+</script>
+</body>
+</html>
